@@ -38,9 +38,9 @@ code {
 } */
 
 .content {
-  /* display: flex; */
-  /* align-items: center; */
-  /* flex-direction: row; */
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   /* gap: 10px; */
   background-color: maroon;
   /* font-size: 0; */

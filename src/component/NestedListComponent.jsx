@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { reorder } from './helper';
+import Drag from './drag-and-drop/Drag.js';
 import { DragDropContext as DragAndDrop } from 'react-beautiful-dnd';
+import Drop from './drag-and-drop/Drop.js';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import Drop from './drag-and-drop/Drop';
-import Drag from './drag-and-drop/Drag';
 
 const NestedListComponent = () => {
   const [categories, setCategories] = useState([
@@ -87,48 +87,57 @@ const NestedListComponent = () => {
   };
 
   return (
-    <Container>
-      <DragAndDrop onDragEnd={handleDragEnd}>
-        <Drop id="droppable" type="droppable-category" className="">
-          {categories.map((category, categoryIndex) => {
-            return (
-              <>
-                <Row>
-                  <Col>
-                    <div className="category-container">
-                      <h2 className="item">this is {category.name}</h2>
+    <DragAndDrop onDragEnd={handleDragEnd}>
+      <Row className='' style={{ background: 'red' }}>
+        <Col>
+          <Drop
+            id='droppable'
+            type='droppable-category'
+            className='d-flex gap-4'
+          >
+            {/* <div id='' className='content'> */}
+            {categories.map((category, categoryIndex) => {
+              return (
+                <div className='category-container'>
+                  {/* <Row>
+                      
+                    </Row> */}
+                  {/* {category.name === 'Category 1' ? ( */}
+                  {/* <div className=''> */}
+                  <>
+                    <h2 className='item'>this is {category.name}</h2>
 
-                      <Drop
-                        key={category.id}
-                        id={category.id}
-                        type="droppable-item"
-                      >
-                        {category.items.map((item, index) => {
-                          return (
-                            <Drag
-                              className="draggable"
-                              key={item.id}
-                              id={item.id}
-                              index={index}
-                            >
-                              <div className="item">
-                                <Card style={{ color: 'black' }}>
-                                  <Card.Title>{item.name}</Card.Title>
-                                </Card>
-                              </div>
-                            </Drag>
-                          );
-                        })}
-                      </Drop>
-                    </div>
-                  </Col>
-                </Row>
-              </>
-            );
-          })}
-        </Drop>
-      </DragAndDrop>
-    </Container>
+                    <Drop
+                      key={category.id}
+                      id={category.id}
+                      type='droppable-item'
+                    >
+                      {category.items.map((item, index) => {
+                        return (
+                          <Drag
+                            className='draggable'
+                            key={item.id}
+                            id={item.id}
+                            index={index}
+                          >
+                            <div className='item'>
+                              <Card style={{ color: 'black' }}>
+                                <Card.Title>{item.name}</Card.Title>
+                              </Card>
+                            </div>
+                          </Drag>
+                        );
+                      })}
+                    </Drop>
+                  </>
+                </div>
+                // </div>
+              );
+            })}
+          </Drop>
+        </Col>
+      </Row>
+    </DragAndDrop>
   );
 };
 
